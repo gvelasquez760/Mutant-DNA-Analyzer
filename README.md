@@ -1,6 +1,6 @@
 # Mutant DNA Analyzer
 
-## service URL:
+## service URL: http://3.229.94.148:5000
 
 ## Installation requirements:
 
