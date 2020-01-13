@@ -47,10 +47,11 @@ module.exports = {
   },
   getMutantRatio: async () => {
     try {
-      return sequelize.query(`SELECT COUNT(*) filter (where "mutant")
+      const result = await sequelize.query(`SELECT COUNT(*) filter (where "mutant")
        as count_mutant_dna, COUNT( *)filter(where not "mutant")as count_human_dna,
        CASE WHEN count( *)filter(where not "mutant") = 0 THEN 0 ELSE(TRUNC(COUNT( *)filter(where "mutant")::numeric / COUNT( *)filter(where not "mutant"),
         1))END as ratio from public.dna_landing;`, {type: sequelize.QueryTypes.SELECT});
+      return result[0];
     } catch (err) {
       console.log(err);
       return err;
