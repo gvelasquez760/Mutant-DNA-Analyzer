@@ -25,7 +25,10 @@
     "sequelize": "^5.21.3"
   },
   "devDependencies": {
+    "cross-env": "^6.0.3",
+    "install": "^0.13.0",
     "jest": "^24.9.0",
+    "npm": "^6.13.6",
     "supertest": "^4.0.2"
   }
 }
