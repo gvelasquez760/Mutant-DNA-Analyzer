@@ -5,10 +5,12 @@ const dna_landing = sequelize.import ('../models/dna_landing');
 const op = Sequelize.Op;
 
 module.exports = {
+  //sync model with database table
   truncateLanding: async () => {
     await dna_landing.sync({force: true});
     console.log('dna_landing truncated');
   },
+  //check database connection
   checkConnection: async () => {
     try {
       await sequelize.authenticate();
@@ -18,6 +20,7 @@ module.exports = {
       return err;
     }
   },
+  //find DNA record in database
   queryDNA: async (dna) => {
     try {
       const result = await dna_landing.findOne({
@@ -36,6 +39,7 @@ module.exports = {
       return err;
     }
   },
+  //insert new DNA record in database
   insertDNA: async (dnaValue, mutantFlag) => {
     try {
       await dna_landing.create({dna_value: dnaValue, mutant: mutantFlag});
@@ -45,6 +49,7 @@ module.exports = {
       return err;
     }
   },
+  //calculate current ratio and count from mutant status
   getMutantRatio: async () => {
     try {
       const result = await sequelize.query(`SELECT COUNT(*) filter (where "mutant")

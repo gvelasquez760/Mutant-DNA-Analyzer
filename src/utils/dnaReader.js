@@ -22,6 +22,7 @@ module.exports = {
       }
     }
   },
+  //check if current DNA is mutant or human
   isMutant: function(dna) {
     const lastPossibleMatch = dna.length - 4 + 1;
     for (var row = 0; row < dna.length; row++) {

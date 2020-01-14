@@ -1,4 +1,5 @@
 module.exports = function(sequelize, Sequelize) {
+  //DNA model definition
   const dna_fields = ({
     dna_value: {
       type: Sequelize.JSONB,
