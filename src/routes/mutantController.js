@@ -17,16 +17,17 @@ router.post('/', async function(req, res) {
   const result = await database.queryDNA(req.body['dna']);
   if (result != null && result.hasOwnProperty('dna_value') && result.hasOwnProperty('mutant')) {
     //DNA record found nothing more to do
-    res.status(200).send(result['mutant']);
+    var mutantFlag = result['mutant'];
   } else {
     //store new DNA record after analysis
-    const mutantFlag = dnaReader.isMutant(req.body['dna']);
+    var mutantFlag = dnaReader.isMutant(req.body['dna']);
     await database.insertDNA(req.body['dna'], mutantFlag);
-    if (mutantFlag) {
-      res.status(200).send(mutantFlag);
-    } else {
-      res.status(403).send(mutantFlag);
-    }
+  }
+  //response with successful or failed status
+  if (mutantFlag) {
+    res.status(200).send(mutantFlag);
+  } else {
+    res.status(403).send(mutantFlag);
   }
 });
 
